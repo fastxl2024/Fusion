@@ -38,6 +38,12 @@
 		label: $lang(option?.toLowerCase())
 	}));
 
+	// Mop Intensity Opties
+	$: mop_intensity_options = attributes?.mop_intensity_list?.map((option: string) => ({
+		id: option,
+		label: $lang(option?.toLowerCase())
+	}));	
+
 	/**
 	 * Handle click
 	 */
@@ -50,10 +56,25 @@
 	/**
 	 * Handle change 'set_fan_speed'
 	 */
-	function handleChange(fan_speed: string) {
-		callService($connection, 'vacuum', 'set_fan_speed', {
-			entity_id: entity?.entity_id,
-			fan_speed
+	 function handleChange(selected_fan_speed: string) {
+    console.log('Selected fan speed:', selected_fan_speed);
+
+    callService($connection, 'vacuum', 'set_fan_speed', {
+        entity_id: 'vacuum.roborock_q7_max',
+        fan_speed: selected_fan_speed,
+    });
+}
+
+	function cleanRoom(script_entity: string) {
+		callService($connection, 'script', 'turn_on', {
+			entity_id: script_entity,
+		});
+	}	
+	
+	function handleMopIntensityChange(mop_intensity: string) {
+		callService($connection, 'select', 'select_option', {
+			entity_id: 'select.roborock_q7_max_mop_intensity',
+			option: mop_intensity,
 		});
 	}
 </script>
@@ -73,16 +94,31 @@
 				{attributes?.battery_level} %
 			{/if}
 		{/if}
+		<!-- Fan Speed and Mop Intensity Options -->
+		{#if supports?.FAN_SPEED}
+			<div class="options-container">
+				<div class="option">
+					<h2>{$lang('fan_speed')}</h2>
+					<Select
+						{options}
+						placeholder={$lang('options')}
+						bind:value={attributes.fan_speed}
+						on:change={(event) => handleChange(event?.detail)}
+					/>
+				</div>
 
-		{#if supports?.FAN_SPEED && options}
-			<h2>{$lang('fan_speed')}</h2>
-
-			<Select
-				{options}
-				placeholder={$lang('options')}
-				value={attributes?.fan_speed}
-				on:change={(event) => handleChange(event?.detail)}
-			/>
+				{#if attributes?.mopForbiddenEnable === 1 && mop_intensity_options}
+					<div class="option">
+						<h2>{$lang('mop_intensity')}</h2>
+						<Select
+							options={mop_intensity_options}
+							placeholder={$lang('mop_intensity')}
+							bind:value={attributes.mop_intensity}
+							on:change={(event) => handleMopIntensityChange(event?.detail)}
+						/>
+					</div>
+				{/if}
+			</div>
 		{/if}
 
 		{#if supports?.TURN_ON || supports?.TURN_OFF || supports?.START || supports?.PAUSE || supports?.STOP || supports?.LOCATE || supports?.RETURN_HOME}
@@ -175,19 +211,52 @@
 					</div>
 				</button>
 			{/if}
+			<button title="Legen" on:click={() => cleanRoom('script.opvangbak_legen')} use:Ripple={$ripple}>
+				<div class="icon" style="transform: scale(0.8);">
+					<Icon icon="mdi:trash" height="none" />
+				</div>
+			</button>			
 		</div>
 
-		<!-- <h2>Supports</h2>
-
-		{#each Object.entries(supports) as [feature, supported]}
-			<div>{feature}: {supported}</div>
-		{/each} -->
+		<!-- Room-specific cleaning buttons-->
+		<h2>Selecteer ruimte</h2>
+		<div class="button-container">
+			<button title="Hal" on:click={() => cleanRoom('script.hal_stofzuigen')} use:Ripple={$ripple}>
+				<div class="icon" style="transform: scale(0.8);">
+					<Icon icon="mdi:door-open" height="none" />
+				</div>
+			</button>
+			<button title="Keuken" on:click={() => cleanRoom('script.keuken_stofzuigen')} use:Ripple={$ripple}>
+				<div class="icon" style="transform: scale(0.8);">
+					<Icon icon="mdi:silverware-fork-knife" height="none" />
+				</div>
+			</button>
+			<button title="Woonkamer" on:click={() => cleanRoom('script.woonkamer_stofzuigen')} use:Ripple={$ripple}>
+				<div class="icon" style="transform: scale(0.8);">
+					<Icon icon="mdi:sofa" height="none" />
+				</div>
+			</button>
+			<button title="Bijkeuken" on:click={() => cleanRoom('script.bijkeuken_stofzuigen')} use:Ripple={$ripple}>
+				<div class="icon" style="transform: scale(0.8);">
+					<Icon icon="mdi:garage" height="none" />
+				</div>
+			</button>
+		</div>
 
 		<ConfigButtons />
 	</Modal>
 {/if}
 
 <style>
+	.options-container {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.option {
+		flex: 1;
+	}
+
 	.button-container > button {
 		display: flex;
 		justify-content: center;

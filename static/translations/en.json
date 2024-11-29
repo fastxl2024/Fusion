@@ -1,4 +1,5 @@
 {
+	"CupboardDry": "Cupboard Dry",
 	"abort_login": "Login aborted",
 	"above": "Above",
 	"above_horizon": "Above horizon",
@@ -207,6 +208,7 @@
 	"mobile": "Mobile",
 	"mode": "Mode",
 	"month": "Month",
+	"mop_intensity": "Mop intensity",
 	"motion": "Motion",
 	"mowing": "Mowing",
 	"name": "Name",

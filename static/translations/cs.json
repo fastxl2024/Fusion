@@ -1,4 +1,5 @@
 {
+	"CupboardDry": "Su\u0161en\u00ed do sk\u0159\u00edn\u011b",
 	"abort_login": "P\u0159ihl\u00e1\u0161en\u00ed bylo zru\u0161eno",
 	"above": "V\u011bt\u0161\u00ed ne\u017e",
 	"above_horizon": "Nad obzorem",
@@ -209,6 +210,7 @@
 	"mobile": "Mobil",
 	"mode": "Re\u017eim",
 	"month": "M\u011bs\u00edc",
+	"mop_intensity": "Intenzita mopov\u00e1n\u00ed",
 	"motion": "Pohyb",
 	"mowing": "Se\u010den\u00ed",
 	"name": "N\u00e1zev",

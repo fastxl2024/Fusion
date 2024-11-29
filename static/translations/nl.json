@@ -1,4 +1,5 @@
 {
+	"CupboardDry": "Kastdroog",
 	"abort_login": "Aanmelden afgebroken",
 	"above": "Boven",
 	"above_horizon": "Boven de horizon",
@@ -207,6 +208,7 @@
 	"mobile": "Mobiel",
 	"mode": "Modus",
 	"month": "Maand",
+	"mop_intensity": "Intensiteit van dweilen",
 	"motion": "Beweging",
 	"mowing": "Maaien",
 	"name": "Naam",

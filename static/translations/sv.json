@@ -1,4 +1,5 @@
 {
+	"CupboardDry": "Sk\u00e5pstorr",
 	"abort_login": "Inloggning avbruten",
 	"above": "\u00d6ver",
 	"above_horizon": "\u00d6ver horisonten",
@@ -209,6 +210,7 @@
 	"mobile": "Mobil",
 	"mode": "L\u00e4ge",
 	"month": "M\u00e5nad",
+	"mop_intensity": "Moppintensitet",
 	"motion": "R\u00f6relse",
 	"mowing": "Klipper",
 	"name": "Namn",

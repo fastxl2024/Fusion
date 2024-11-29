@@ -1,4 +1,5 @@
 {
+	"CupboardDry": "\u30af\u30ed\u30fc\u30bc\u30c3\u30c8\u30c9\u30e9\u30a4",
 	"abort_login": "\u30ed\u30b0\u30a4\u30f3\u304c\u4e2d\u6b62\u3055\u308c\u307e\u3057\u305f",
 	"above": "\u8d85\u904e",
 	"above_horizon": "\u5730\u5e73\u7dda\u3088\u308a\u4e0a",
@@ -209,6 +210,7 @@
 	"mobile": "\u30e2\u30d0\u30a4\u30eb",
 	"mode": "\u30e2\u30fc\u30c9",
 	"month": "\u6708",
+	"mop_intensity": "\u30e2\u30c3\u30d7\u306e\u5f37\u3055",
 	"motion": "\u30e2\u30fc\u30b7\u30e7\u30f3",
 	"mowing": "\u8349\u5208\u308a",
 	"name": "\u540d\u524d",
